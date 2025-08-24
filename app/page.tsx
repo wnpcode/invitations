@@ -251,7 +251,8 @@ export default function Home() {
                 <div className="grid md:grid-cols-2 gap-12">
                   <div>
                     <Image
-                      src="/mempelai-wanita.resized.JPG"
+                      src=""
+                      // src="/mempelai-wanita.resized.JPG"
                       alt="Mempelai Wanita"
                       width={200}
                       height={200}
@@ -264,7 +265,8 @@ export default function Home() {
                   </div>
                   <div>
                     <Image
-                      src="/mempelai-pria.resized.JPG"
+                      src=""
+                      // src="/mempelai-pria.resized.JPG"
                       alt="Mempelai Pria"
                       width={200}
                       height={200}
