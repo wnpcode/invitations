@@ -152,6 +152,28 @@ export default function Home() {
       });
     }
   }, [opened]);
+  useEffect(() => {
+    if (!opened) return;
+    const handleVisibilityChange = () => {
+      if (!document.hidden && audioRef.current && !isPlaying) {
+        audioRef.current.play().catch(() => {});
+        setIsPlaying(true);
+      } else if (
+        document.hidden &&
+        audioRef.current &&
+        !audioRef.current.paused
+      ) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [isPlaying]);
 
   return (
     <>
