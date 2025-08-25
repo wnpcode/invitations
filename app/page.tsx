@@ -1,95 +1,93 @@
 "use client";
 
-import Image from "next/image";
 import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
 
 import { CustomEase } from "gsap/CustomEase";
-// CustomBounce requires CustomEase
-import { CustomBounce } from "gsap/CustomBounce";
-// CustomWiggle requires CustomEase
-import { CustomWiggle } from "gsap/CustomWiggle";
-import { RoughEase, ExpoScaleEase, SlowMo } from "gsap/EasePack";
-
-import { Draggable } from "gsap/Draggable";
-import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
-import { EaselPlugin } from "gsap/EaselPlugin";
-import { Flip } from "gsap/Flip";
-import { GSDevTools } from "gsap/GSDevTools";
-import { InertiaPlugin } from "gsap/InertiaPlugin";
-import { MotionPathHelper } from "gsap/MotionPathHelper";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
-import { Observer } from "gsap/Observer";
-import { Physics2DPlugin } from "gsap/Physics2DPlugin";
-import { PhysicsPropsPlugin } from "gsap/PhysicsPropsPlugin";
-import { PixiPlugin } from "gsap/PixiPlugin";
-import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // ScrollSmoother requires ScrollTrigger
-import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { SplitText } from "gsap/SplitText";
-import { TextPlugin } from "gsap/TextPlugin";
-import { useEffect, useRef, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AccordionSection from "@/components/AccordionSection";
 import {
+  faCopy,
   faPauseCircle,
   faPlayCircle,
-  faWindowMaximize,
-  faWindowMinimize,
 } from "@fortawesome/free-regular-svg-icons";
 import {
   faCompressArrowsAlt,
   faExpandArrowsAlt,
+  faGift,
+  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { TextPlugin } from "gsap/TextPlugin";
+import { useEffect, useRef, useState } from "react";
+import "./gift.css";
 
 gsap.registerPlugin(
-  useGSAP,
-  Draggable,
-  DrawSVGPlugin,
-  EaselPlugin,
-  Flip,
-  GSDevTools,
-  InertiaPlugin,
-  MotionPathHelper,
-  MotionPathPlugin,
-  MorphSVGPlugin,
-  Observer,
-  Physics2DPlugin,
-  PhysicsPropsPlugin,
-  PixiPlugin,
-  ScrambleTextPlugin,
   ScrollTrigger,
-  ScrollSmoother,
   ScrollToPlugin,
-  SplitText,
+  ScrollSmoother,
   TextPlugin,
-  RoughEase,
-  ExpoScaleEase,
-  SlowMo,
-  CustomEase,
-  CustomBounce,
-  CustomWiggle
+  CustomEase
 );
 
 export default function Home() {
   const [opened, setOpened] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // refs untuk animasi GSAP
   const sectionsRef = useRef<(HTMLElement | null)[]>([]);
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const sectionIds = [
-    "opening",
-    "biodata",
-    "waktu",
-    "galeri",
-    // "ucapan",
-    // "terimakasih",
+  const sectionIds = ["opening", "biodata", "waktu", "galeri", "ucapan"];
+  const banks = [
+    {
+      number: "0123456789",
+      name: "Nama Penerima",
+      src: "bca.png",
+      alt: "BCA",
+    },
+    {
+      number: "0123456789",
+      name: "Nama Penerima",
+      src: "gopay.svg",
+      alt: "GOPAY",
+    },
+  ];
+  const galeries = [
+    {
+      src: "https://i.ibb.co.com/kzYVRx8/gallery1.jpg",
+      span: "row-span-2 col-span-2",
+    },
+    {
+      src: "https://i.ibb.co.com/fVM4XSwH/gallery2.jpg",
+      span: "row-span-1 col-span-1",
+    },
+    {
+      src: "https://i.ibb.co.com/PsdgjbCW/gallery3.jpg",
+      span: "row-span-2 col-span-1",
+    },
+    {
+      src: "https://i.ibb.co.com/hJWzskgQ/gallery4.jpg",
+      span: "row-span-1 col-span-2",
+    },
+    {
+      src: "https://i.ibb.co.com/0RqVm6N4/gallery5.jpg",
+      span: "row-span-1 col-span-1",
+    },
+    {
+      src: "https://i.ibb.co.com/V54Jd0k/gallery6.jpg",
+      span: "row-span-2 col-span-2",
+    },
+    {
+      src: "https://i.ibb.co.com/svR69pd9/gallery7.jpg",
+      span: "row-span-1 col-span-1",
+    },
+    {
+      src: "https://i.ibb.co.com/DHHr7q2Z/gallery8.jpg",
+      span: "row-span-1 col-span-1",
+    },
   ];
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const toggleAudio = () => {
     if (!audioRef.current) return;
@@ -102,6 +100,7 @@ export default function Home() {
       setIsPlaying(true);
     }
   };
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handleOpenInvitation = () => {
     setOpened(true);
@@ -163,7 +162,6 @@ export default function Home() {
           }
         );
       });
-      // ScrollSpy - Highlight menu based on current section
       sectionIds.forEach((id, index) => {
         const sectionEl = document.getElementById(id);
         if (sectionEl) {
@@ -178,6 +176,7 @@ export default function Home() {
       });
     }
   }, [opened]);
+
   useEffect(() => {
     if (!opened) return;
     const handleVisibilityChange = () => {
@@ -200,6 +199,26 @@ export default function Home() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [isPlaying]);
+  const [active, setActive] = useState<string | null>(null);
+
+  const sectionsGiftRef = {
+    eAmplop: useRef<HTMLDivElement>(null),
+    giftRegistry: useRef<HTMLDivElement>(null),
+  };
+  const [openSection, setOpenSection] = useState<string | null>(null);
+
+  const toggleSection = (id: string) => {
+    setOpenSection((prev) => (prev === id ? null : id));
+  };
+
+  useEffect(() => {
+    Object.values(sectionsGiftRef).forEach((ref) => {
+      if (ref.current) {
+        ref.current.style.display = "none";
+        ref.current.style.overflow = "hidden";
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -345,7 +364,6 @@ export default function Home() {
                 <div className="grid md:grid-cols-2 gap-12">
                   <div>
                     <img
-                      // src=""
                       src="https://i.ibb.co.com/0R2FffKy/mempelai-wanita-resized.jpg"
                       alt="Mempelai Wanita"
                       width={200}
@@ -359,7 +377,6 @@ export default function Home() {
                   </div>
                   <div>
                     <img
-                      // src=""
                       src="https://i.ibb.co.com/R4zMLJgP/mempelai-pria-resized.jpg"
                       alt="Mempelai Pria"
                       width={200}
@@ -483,40 +500,7 @@ export default function Home() {
                 </video>
                 <h2 className="text-2xl font-bold mt-8">Galeri Momen</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 grid-flow-dense gap-4 auto-rows-[150px] md:auto-rows-[200px]">
-                  {[
-                    {
-                      src: "https://i.ibb.co.com/kzYVRx8/gallery1.jpg",
-                      span: "row-span-2 col-span-2",
-                    },
-                    {
-                      src: "https://i.ibb.co.com/fVM4XSwH/gallery2.jpg",
-                      span: "row-span-1 col-span-1",
-                    },
-                    {
-                      src: "https://i.ibb.co.com/PsdgjbCW/gallery3.jpg",
-                      span: "row-span-2 col-span-1",
-                    },
-                    {
-                      src: "https://i.ibb.co.com/hJWzskgQ/gallery4.jpg",
-                      span: "row-span-1 col-span-2",
-                    },
-                    {
-                      src: "https://i.ibb.co.com/0RqVm6N4/gallery5.jpg",
-                      span: "row-span-1 col-span-1",
-                    },
-                    {
-                      src: "https://i.ibb.co.com/V54Jd0k/gallery6.jpg",
-                      span: "row-span-2 col-span-2",
-                    },
-                    {
-                      src: "https://i.ibb.co.com/svR69pd9/gallery7.jpg",
-                      span: "row-span-1 col-span-1",
-                    },
-                    {
-                      src: "https://i.ibb.co.com/DHHr7q2Z/gallery8.jpg",
-                      span: "row-span-1 col-span-1",
-                    },
-                  ].map((img, i) => (
+                  {galeries.map((img, i) => (
                     <div
                       key={i}
                       className={`relative ${img.span} overflow-hidden rounded-xl`}
@@ -543,15 +527,95 @@ export default function Home() {
                 }}
                 className="py-16 text-center px-6 bg-[#756863] text-white "
               >
-                <h2 className="text-2xl font-bold mb-6">Doa & Ucapan</h2>
-                <p>Silakan tinggalkan doa dan ucapan terbaik untuk pengantin</p>
-                <textarea
-                  className="w-full md:w-1/2 p-3 rounded-lg mt-6 text-black"
-                  placeholder="Tulis doa & ucapan..."
-                />
-                <button className="mt-4 px-6 py-2 bg-white text-[#756863] rounded-lg shadow">
-                  Kirim
-                </button>
+                <h3 className="text-xl font-bold mb-6">Doa & Ucapan</h3>
+                <h2 className="text-2xl font-bold mb-6">Teruntuk Mempelai</h2>
+                <p>
+                  Sapa dan kirim ucapan beserta doa yang terbaik untuk mereka
+                  yang berbahagia, sembari mengkonfirmasi kehadiran anda pada
+                  acara pernikahan kedua mempelai.
+                </p>
+                {/* Form */}
+                <div className="max-w-2xl mx-auto text-left space-y-4 mb-8">
+                  <input
+                    type="text"
+                    placeholder="Nama"
+                    className="w-full p-3 border-b border-[#aaa] bg-transparent focus:outline-none"
+                  />
+                  <textarea
+                    rows={3}
+                    placeholder="Ucapan"
+                    className="w-full p-3 border-b border-[#aaa] bg-transparent focus:outline-none"
+                  ></textarea>
+                  <select
+                    className="w-full p-3 border-b border-[#aaa] bg-transparent focus:outline-none"
+                    defaultValue=""
+                  >
+                    <option value="" disabled>
+                      Konfirmasi Kehadiran
+                    </option>
+                    <option value="hadir">Hadir</option>
+                    <option value="tidak">Tidak Hadir</option>
+                  </select>
+                  <div className="text-right">
+                    <button className="bg-[#756863] text-white px-6 py-2 rounded shadow">
+                      Kirim
+                    </button>
+                  </div>
+                </div>
+                {/* Statistik */}
+                <div className="max-w-md mx-auto flex justify-center gap-6 mb-8">
+                  <div className="border p-4 rounded text-center">
+                    <p className="text-2xl font-bold">8</p>
+                    <p>Hadir</p>
+                  </div>
+                  <div className="border p-4 rounded text-center">
+                    <p className="text-2xl font-bold  ">0</p>
+                    <p>Tidak Hadir</p>
+                  </div>
+                </div>
+                {/* Daftar Komentar */}
+                <div className="max-w-2xl mx-auto space-y-6 text-left">
+                  {[
+                    {
+                      name: "Test",
+                      message: "Selamat ya!",
+                      date: "9 bulan, 2 minggu lalu",
+                    },
+                    {
+                      name: "Airin",
+                      message: "Selamat ya ❤️",
+                      date: "11 bulan, 3 minggu lalu",
+                    },
+                    {
+                      name: "Coba",
+                      message: "Selamat yaaa",
+                      date: "12 bulan lalu",
+                    },
+                  ].map((item, i) => (
+                    <div key={i}>
+                      <p className="font-semibold flex items-center gap-1">
+                        {item.name} <span className="text-green-500">✔</span>
+                      </p>
+                      <p>{item.message}</p>
+                      <p className="text-sm text-gray-200 mt-1 flex items-center gap-1">
+                        <span>🕒</span>
+                        {item.date}
+                        <span className="mx-2">•</span>
+                        <button className="underline text-sm cursor-pointer">
+                          Reply
+                        </button>
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <blockquote className="italic max-w-2xl mx-auto font-thin text-md leading-relaxed mt-10">
+                  “Semoga Allah memberkahimu dan memberkahi apa yang menjadi
+                  tanggung jawabmu, serta menyatukan kalian berdua dalam
+                  kebaikan.”
+                </blockquote>
+                <p className="mt-4 font-bold">
+                  (HR. Ahmad, at-Tirmidzi, an-Nasa’i, Abu Dawud, dan Ibnu Majah)
+                </p>
               </section>
 
               {/* Section 9 - Hadiah */}
@@ -562,14 +626,162 @@ export default function Home() {
                 }}
                 className="py-16 text-center px-6 min-h-screen"
               >
-                <h2 className="text-2xl font-bold mb-6">Hadiah & E-Amplop</h2>
-                <p className="mb-4">
-                  Jika berkenan memberikan hadiah, silakan transfer ke rekening:
-                </p>
-                <p className="font-semibold">BCA 123456789 a.n Aisyah</p>
-                <button className="mt-6 px-6 py-2 bg-[#756863] text-white rounded-lg shadow">
-                  Salin Rekening
-                </button>
+                <div className="m-auto max-w-xl w-full bg-[#fcfcfd] text-[#4b4039] rounded-md overflow-hidden shadow-xl">
+                  <img
+                    src="https://i.ibb.co.com/xqm7LjbN/bg-biodata-resized.jpg" // Ubah ke nama file kamu
+                    alt="Pasangan"
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="p-6 text-center">
+                    <h2 className="text-3xl font-serif font-semibold mb-4">
+                      Hadiah Pernikahan
+                    </h2>
+                    <p className="text-sm md:text-base leading-relaxed mb-6">
+                      Doa Restu Anda merupakan karunia yang sangat berarti bagi
+                      kami. Namun jika memberi adalah ungkapan tanda kasih Anda,
+                      kami akan senang hati menerimanya yang tentu akan semakin
+                      melengkapi kebahagiaan kami.
+                    </p>
+                    <div className="flex justify-center gap-4 flex-wrap">
+                      <button
+                        onClick={() => toggleSection("e-amplop")}
+                        className="w-fit px-6 py-3 bg-[#756863] text-white font-semibold rounded-lg shadow hover:scale-105 transition mb-2"
+                      >
+                        E-Amplop
+                      </button>
+                      <button
+                        onClick={() => toggleSection("gift-registry")}
+                        className="w-fit px-6 py-3 bg-[#756863] text-white font-semibold rounded-lg shadow hover:scale-105 transition mb-2"
+                      >
+                        Gift Registry
+                      </button>
+                      <AccordionSection isOpen={openSection === "e-amplop"}>
+                        <div id="bank-cards" className="bank-cards ">
+                          {banks.map((item) => (
+                            <div key={`bank-${item.src}`} className="bank-card">
+                              <img
+                                src={`/${item.src}`}
+                                className="bank-logo"
+                                alt={item.alt}
+                              ></img>
+                              <p className="card-number">{item.number}</p>
+                              <p className="card-name">{item.name}</p>
+                              <button className="copy-btn">
+                                <FontAwesomeIcon
+                                  icon={faCopy}
+                                ></FontAwesomeIcon>{" "}
+                                Salin
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div
+                          id="gift-address"
+                          className="gift-address text-white"
+                        >
+                          <h3>KIRIM KADO</h3>
+                          <p>
+                            Jl. Lorem Ipsum No. 01, RT01 RW01, Kel. Dolor, Kec.
+                            Sit Amet, Kota Bandung
+                          </p>
+                          <button className="copy-btn">
+                            <FontAwesomeIcon icon={faCopy}></FontAwesomeIcon>{" "}
+                            SALIN
+                          </button>
+                        </div>
+
+                        <div className="gift-confirmation">
+                          <h3>Konfirmasi Kirim Hadiah</h3>
+                          <form>
+                            <input
+                              type="text"
+                              name="name"
+                              placeholder="Tuliskan Nama Anda"
+                              required
+                            />
+                            <input
+                              type="text"
+                              name="amount"
+                              placeholder="Nominal/Kado"
+                              required
+                            />
+                            <select name="destination" required>
+                              <option value="">Rekening/Alamat Tujuan</option>
+                              <option value="BCA - 0123456789">
+                                BCA - 0123456789
+                              </option>
+                              <option value="Gopay - 0123456789">
+                                Gopay - 0123456789
+                              </option>
+                              <option value="Alamat Rumah">Alamat Rumah</option>
+                            </select>
+                            <button type="submit" className="btn">
+                              Konfirmasi via WhatsApp
+                            </button>
+                          </form>
+                        </div>
+                      </AccordionSection>
+                      <AccordionSection
+                        isOpen={openSection === "gift-registry"}
+                      >
+                        <div className="gift-address-card">
+                          <div className="icon">
+                            <FontAwesomeIcon icon={faGift}></FontAwesomeIcon>
+                          </div>
+                          <div className="details">
+                            <div className="name">Nama Penerima</div>
+                            <div className="address">
+                              Jl. Lorem Ipsum No. 21, Kel. Dolor, Kec. Sit Amet,
+                              Kota Bandung, 40XXX
+                            </div>
+                          </div>
+                          <button className="btn-copy">
+                            <FontAwesomeIcon icon={faCopy}></FontAwesomeIcon>{" "}
+                            Salin
+                          </button>
+                        </div>
+
+                        <div className="gift-suggestions  text-white">
+                          <h3>REKOMENDASI KADO</h3>
+                          <div className="gift-carousel">
+                            <div className="gift-item">
+                              <img
+                                src="https://attarivitation.com/wp-content/uploads/2025/06/09faff98-f96e-498f-be58-da01f0919d2c.webp"
+                                alt="Debellin Cookware Set"
+                              ></img>
+                              <p className="title">Debellin Cookware Set</p>
+                              <p className="price">Rp 899.000</p>
+                              <p className="amount">Amount : 1</p>
+                            </div>
+                            <div className="gift-item">
+                              <img
+                                src="https://attarivitation.com/wp-content/uploads/2025/06/09faff98-f96e-498f-be58-da01f0919d2c.webp"
+                                alt="Sprei Bedcover"
+                              ></img>
+                              <p className="title">Sprei Bedcover</p>
+                              <p className="price">Rp 379.000</p>
+                              <p className="amount">Amount : 1</p>
+                            </div>
+                            <div className="gift-item">
+                              <img
+                                src="https://attarivitation.com/wp-content/uploads/2025/06/09faff98-f96e-498f-be58-da01f0919d2c.webp"
+                                alt="Vacuum Cleaner"
+                              ></img>
+                              <p className="title">Vacuum Cleaner</p>
+                              <p className="price">Rp 99.500</p>
+                              <p className="amount">Amount : 1</p>
+                            </div>
+                          </div>
+                          <button className="btn view-all">
+                            <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>{" "}
+                            Lihat Semua Kado
+                          </button>
+                        </div>
+                      </AccordionSection>
+                    </div>
+                  </div>
+                </div>
               </section>
 
               {/* Section 10 - Terimakasih */}

@@ -25,6 +25,13 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@font-face {
+  font-family: 'Tan Pearl';
+  src: url('/fonts/tan-pearl.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 h2{
   font-family: "Tan Pearl", sans-serif;
 }
