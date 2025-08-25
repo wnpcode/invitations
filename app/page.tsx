@@ -32,6 +32,17 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { SplitText } from "gsap/SplitText";
 import { TextPlugin } from "gsap/TextPlugin";
 import { useEffect, useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPauseCircle,
+  faPlayCircle,
+  faWindowMaximize,
+  faWindowMinimize,
+} from "@fortawesome/free-regular-svg-icons";
+import {
+  faCompressArrowsAlt,
+  faExpandArrowsAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 gsap.registerPlugin(
   useGSAP,
@@ -78,6 +89,7 @@ export default function Home() {
     // "terimakasih",
   ];
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const toggleAudio = () => {
     if (!audioRef.current) return;
@@ -98,6 +110,20 @@ export default function Home() {
         .play()
         .then(() => setIsPlaying(true))
         .catch(() => {});
+    }
+  };
+  const toggleFullscreen = () => {
+    const elem = document.documentElement;
+
+    if (!document.fullscreenElement) {
+      setIsFullscreen(true);
+      elem.requestFullscreen?.().catch((err) => {
+        setIsFullscreen(false);
+        console.warn("Fullscreen gagal:", err);
+      });
+    } else {
+      setIsFullscreen(false);
+      document.exitFullscreen?.();
     }
   };
 
@@ -206,17 +232,30 @@ export default function Home() {
               </button>
             ))}
           </nav>
-          <button
-            onClick={toggleAudio}
-            className="fixed bottom-4 left-4 z-50 bg-white p-3 rounded-full shadow-lg hover:scale-105 transition"
-            aria-label="Kontrol Musik"
-          >
-            {isPlaying ? (
-              <span>⏸️</span> // Pause icon
-            ) : (
-              <span>▶️</span> // Play icon
-            )}
-          </button>
+          <div className="fixed bottom-4 left-4 z-50 flex flex-col items-center gap-2">
+            <button
+              onClick={toggleAudio}
+              className=" bg-white text-[#756863] p-2 size-10 rounded-full shadow-lg hover:scale-105 transition"
+              aria-label="Kontrol Musik"
+            >
+              {isPlaying ? (
+                <FontAwesomeIcon icon={faPauseCircle}></FontAwesomeIcon>
+              ) : (
+                <FontAwesomeIcon icon={faPlayCircle}></FontAwesomeIcon>
+              )}
+            </button>
+            <button
+              onClick={toggleFullscreen}
+              className="bg-white text-[#756863] p-2 size-10 rounded-full shadow-lg hover:scale-105 transition"
+              aria-label="Fullscreen"
+            >
+              {isFullscreen ? (
+                <FontAwesomeIcon icon={faCompressArrowsAlt}></FontAwesomeIcon>
+              ) : (
+                <FontAwesomeIcon icon={faExpandArrowsAlt}></FontAwesomeIcon>
+              )}
+            </button>
+          </div>
         </>
       )}
 
