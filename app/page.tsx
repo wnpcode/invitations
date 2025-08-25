@@ -386,7 +386,10 @@ export default function Home() {
                   sectionsRef.current[4] = el;
                 }}
                 className="py-16 text-center px-6 bg-[#f9f9fa]"
-                style={{ backgroundImage: "url('/bg-timeline.jpg')" }}
+                style={{
+                  backgroundImage:
+                    "url('https://i.ibb.co.com/Mxm3Z5Vx/bg-pengantin-resized.jpg')",
+                }}
               >
                 <h2 className="text-2xl font-bold mb-8">Perjalanan Cinta</h2>
                 <div className="space-y-4 max-w-xl mx-auto">
