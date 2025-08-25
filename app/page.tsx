@@ -77,11 +77,27 @@ export default function Home() {
     "ucapan",
     "terimakasih",
   ];
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggleAudio = () => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play().catch(() => {});
+      setIsPlaying(true);
+    }
+  };
 
   const handleOpenInvitation = () => {
     setOpened(true);
     if (audioRef.current) {
-      audioRef.current.play().catch(() => {});
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => {});
     }
   };
 
@@ -140,33 +156,46 @@ export default function Home() {
   return (
     <>
       {opened && (
-        <nav
-          id="menu"
-          className="fixed bottom-4 left-1/2 -translate-x-1/2 w-fit bg-white rounded-2xl shadow z-50 px-4 py-2 flex justify-center gap-4 text-sm font-semibold"
-        >
-          {sectionIds.map((id) => (
-            <button
-              key={id}
-              onClick={() => {
-                const el = document.getElementById(id);
-                if (el) {
-                  gsap.to(window, {
-                    duration: 1,
-                    scrollTo: { y: el, offsetY: 0 },
-                    ease: "power2.out",
-                  });
-                }
-              }}
-              className={`${
-                activeSection === id
-                  ? "text-[#756863] text-md "
-                  : "text-gray-400 text-sm"
-              } transition`}
-            >
-              {id.charAt(0).toUpperCase() + id.slice(1)}
-            </button>
-          ))}
-        </nav>
+        <>
+          <nav
+            id="menu"
+            className="fixed bottom-4 left-1/2 -translate-x-1/2 w-fit bg-white rounded-2xl shadow z-50 px-4 py-2 flex justify-center gap-4 text-sm font-semibold"
+          >
+            {sectionIds.map((id) => (
+              <button
+                key={id}
+                onClick={() => {
+                  const el = document.getElementById(id);
+                  if (el) {
+                    gsap.to(window, {
+                      duration: 1,
+                      scrollTo: { y: el, offsetY: 0 },
+                      ease: "power2.out",
+                    });
+                  }
+                }}
+                className={`${
+                  activeSection === id
+                    ? "text-[#756863] text-md "
+                    : "text-gray-400 text-sm"
+                } transition`}
+              >
+                {id.charAt(0).toUpperCase() + id.slice(1)}
+              </button>
+            ))}
+          </nav>
+          <button
+            onClick={toggleAudio}
+            className="fixed bottom-4 left-4 z-50 bg-white p-3 rounded-full shadow-lg hover:scale-105 transition"
+            aria-label="Kontrol Musik"
+          >
+            {isPlaying ? (
+              <span>⏸️</span> // Pause icon
+            ) : (
+              <span>▶️</span> // Play icon
+            )}
+          </button>
+        </>
       )}
 
       <div id="smooth-wrapper">
@@ -176,7 +205,10 @@ export default function Home() {
         >
           {/* Background Music */}
           <audio ref={audioRef} loop>
-            <source src="/music.mp3" type="audio/mpeg" />
+            <source
+              src="/Juicy Luicy  - Lagu Nikah (Official Lyric Video).mp3"
+              type="audio/mpeg"
+            />
           </audio>
 
           {/* Section 1 - Cover */}
@@ -380,7 +412,7 @@ export default function Home() {
                   loop
                   className="w-full h-[400px] object-cover rounded-2xl shadow-lg"
                 >
-                  <source src="/moment.mp4" type="video/mp4" />
+                  {/* <source src="/moment.mp4" type="video/mp4" /> */}
                 </video>
                 <h2 className="text-2xl font-bold mt-8">Galeri Momen</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 grid-flow-dense gap-4 auto-rows-[150px] md:auto-rows-[200px]">
