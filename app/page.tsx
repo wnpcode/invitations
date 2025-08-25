@@ -74,8 +74,8 @@ export default function Home() {
     "biodata",
     "waktu",
     "galeri",
-    "ucapan",
-    "terimakasih",
+    // "ucapan",
+    // "terimakasih",
   ];
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -191,7 +191,7 @@ export default function Home() {
                   if (el) {
                     gsap.to(window, {
                       duration: 1,
-                      scrollTo: { y: el, offsetY: 0 },
+                      scrollTo: { y: el, offsetY: 20 },
                       ease: "power2.out",
                     });
                   }
@@ -277,9 +277,9 @@ export default function Home() {
                 <p className="mt-2 text-lg">12 Desember 2025</p>
               </section>
 
-              <section className="relative py-32 text-center px-6 overflow-hidden h-screen">
+              <section className="relative py-32 text-center px-6 overflow-hidden min-h-screen">
                 <div
-                  className="absolute inset-0 -z-10 bg-center bg-cover"
+                  className="absolute inset-0 bg-center bg-cover"
                   style={{
                     backgroundImage:
                       "url('https://i.ibb.co.com/xqm7LjbN/bg-biodata-resized.jpg')",
@@ -296,7 +296,7 @@ export default function Home() {
                 className="py-16 text-center px-6 min-h-screen"
               >
                 {/* <div
-                className="absolute inset-0 -z-10 bg-center bg-cover"
+                className="absolute inset-0 bg-center bg-cover"
                 style={{
                   backgroundImage: "url('/bg-biodata.jpg')",
                 }}
@@ -381,7 +381,7 @@ export default function Home() {
                 ref={(el) => {
                   sectionsRef.current[3] = el;
                 }}
-                className="py-16 text-center px-6 h-screen"
+                className="py-16 text-center px-6 min-h-screen"
               >
                 <h2 className="text-2xl font-bold mb-6">Waktu & Tempat</h2>
                 <div className="space-y-6">
@@ -398,9 +398,9 @@ export default function Home() {
                 </div>
               </section>
 
-              <section className="relative py-32 text-center px-6 overflow-hidden h-screen">
+              <section className="relative py-32 text-center px-6 overflow-hidden min-h-screen">
                 <div
-                  className="absolute inset-0 -z-10 bg-center bg-cover"
+                  className="absolute inset-0 bg-center bg-cover"
                   style={{
                     backgroundImage:
                       "url('https://i.ibb.co.com/Mxm3Z5Vx/bg-pengantin-resized.jpg')",
@@ -521,7 +521,7 @@ export default function Home() {
                 ref={(el) => {
                   sectionsRef.current[7] = el;
                 }}
-                className="py-16 text-center px-6 h-screen"
+                className="py-16 text-center px-6 min-h-screen"
               >
                 <h2 className="text-2xl font-bold mb-6">Hadiah & E-Amplop</h2>
                 <p className="mb-4">
