@@ -43,13 +43,15 @@ export default function AccordionSection({
 
   return (
     <>
-      <div className="max-w-xl mx-auto text-left">
+      <div className="w-full mx-auto text-left bg-[#695951] text-white">
         <div
           ref={contentRef}
           className="overflow-hidden h-0 opacity-0"
           style={{ pointerEvents: isOpen ? "auto" : "none" }}
         >
-          <div className="p-6 bg-white shadow-md rounded-b-lg">{children}</div>
+          <div className="p-6 bg-[#695951] text-white shadow-md rounded-b-lg">
+            {children}
+          </div>
         </div>
       </div>
     </>
