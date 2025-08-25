@@ -293,7 +293,7 @@ export default function Home() {
                 ref={(el) => {
                   sectionsRef.current[1] = el;
                 }}
-                className="py-16 text-center px-6 h-screen"
+                className="py-16 text-center px-6 min-h-screen"
               >
                 {/* <div
                 className="absolute inset-0 -z-10 bg-center bg-cover"
@@ -342,19 +342,16 @@ export default function Home() {
                     Yang Berbahagia
                   </h3>
                   <div className="grid md:grid-cols-3 gap-8 text-center">
-                    {/* Keluarga kiri */}
                     <div>
                       <p className="font-medium">Keluarga Bapak Masrukin</p>
                       <p className="font-medium">Ibu Murti</p>
                     </div>
-                    {/* Keluarga tengah */}
                     <div>
                       <p className="font-medium">
                         Keluarga Bapak Suwarno (Alm)
                       </p>
                       <p className="font-medium">Ibu Prahesti Rahayu Kartini</p>
                     </div>
-                    {/* Keluarga kanan */}
                     <div>
                       <p className="font-medium">Keluarga Bapak Tri</p>
                       <p className="font-medium">Ibu Kurnia Ismiasih</p>
