@@ -186,8 +186,8 @@ export default function Home() {
               <h2 className="text-2xl font-bold">Bapak/Ibu/Saudara/i</h2>
               <p className="mt-4">Kami mengundang Anda ke pernikahan kami</p>
               <div className="mt-6">
-                <Image
-                  src="/cover.jpg"
+                <img
+                  src="https://i.ibb.co.com/6cd5Kwpm/image.png"
                   alt="Mempelai"
                   width={250}
                   height={250}
@@ -212,8 +212,8 @@ export default function Home() {
                 }}
                 className="h-screen flex flex-col justify-center items-center text-center p-6"
               >
-                <Image
-                  src="/couple.png"
+                <img
+                  src="https://i.ibb.co.com/qFn029hh/couple.png"
                   alt="Pengantin"
                   width={300}
                   height={300}
@@ -227,7 +227,8 @@ export default function Home() {
                 <div
                   className="absolute inset-0 -z-10 bg-center bg-cover"
                   style={{
-                    backgroundImage: "url('/bg-biodata.jpg')",
+                    backgroundImage:
+                      "url('https://i.ibb.co.com/xqm7LjbN/bg-biodata-resized.jpg')",
                   }}
                   data-speed="0.5"
                 ></div>
@@ -250,9 +251,9 @@ export default function Home() {
                 <h2 className="text-2xl font-bold mb-8">Biodata Pengantin</h2>
                 <div className="grid md:grid-cols-2 gap-12">
                   <div>
-                    <Image
+                    <img
                       // src=""
-                      src="/mempelai-wanita.resized.JPG"
+                      src="https://i.ibb.co.com/0R2FffKy/mempelai-wanita-resized.jpg"
                       alt="Mempelai Wanita"
                       width={200}
                       height={200}
@@ -264,9 +265,9 @@ export default function Home() {
                     <p>Putri dari Bapak Masrukin & Ibu Kurnia Ismiasih</p>
                   </div>
                   <div>
-                    <Image
+                    <img
                       // src=""
-                      src="/mempelai-pria.resized.JPG"
+                      src="https://i.ibb.co.com/R4zMLJgP/mempelai-pria-resized.jpg"
                       alt="Mempelai Pria"
                       width={200}
                       height={200}
@@ -385,35 +386,35 @@ export default function Home() {
                 <div className="grid grid-cols-2 md:grid-cols-4 grid-flow-dense gap-4 auto-rows-[150px] md:auto-rows-[200px]">
                   {[
                     {
-                      src: "SAE03773.resized.jpg",
+                      src: "https://i.ibb.co.com/kzYVRx8/gallery1.jpg",
                       span: "row-span-2 col-span-2",
                     },
                     {
-                      src: "IMG_20241115_063918.resized.jpg",
+                      src: "https://i.ibb.co.com/fVM4XSwH/gallery2.jpg",
                       span: "row-span-1 col-span-1",
                     },
                     {
-                      src: "IMG_20240927_103158_035.resized.jpg",
+                      src: "https://i.ibb.co.com/PsdgjbCW/gallery3.jpg",
                       span: "row-span-2 col-span-1",
                     },
                     {
-                      src: "IMG_20240412_123700 (1).resized.jpg",
+                      src: "https://i.ibb.co.com/hJWzskgQ/gallery4.jpg",
                       span: "row-span-1 col-span-2",
                     },
                     {
-                      src: "IMG_20240208_114857_751.resized.jpg",
+                      src: "https://i.ibb.co.com/0RqVm6N4/gallery5.jpg",
                       span: "row-span-1 col-span-1",
                     },
                     {
-                      src: "IMG_20240927_145301_070.resized.jpg",
+                      src: "https://i.ibb.co.com/V54Jd0k/gallery6.jpg",
                       span: "row-span-2 col-span-2",
                     },
                     {
-                      src: "IMG_20240926_052546.resized.jpg",
+                      src: "https://i.ibb.co.com/svR69pd9/gallery7.jpg",
                       span: "row-span-1 col-span-1",
                     },
                     {
-                      src: "IMG_20240926_072233.resized.jpg",
+                      src: "https://i.ibb.co.com/DHHr7q2Z/gallery8.jpg",
                       span: "row-span-1 col-span-1",
                     },
                   ].map((img, i) => (
@@ -421,15 +422,10 @@ export default function Home() {
                       key={i}
                       className={`relative ${img.span} overflow-hidden rounded-xl`}
                     >
-                      <Image
-                        src={`/${img.src}`}
+                      <img
+                        src={img.src}
                         alt="Galeri"
-                        // width={200}
-                        // height={200}
-                        // className="rounded-xl"
-                        layout="fill"
-                        objectFit="cover"
-                        className="hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full hover:scale-105 transition-transform duration-500  object-cover object-center"
                       />
                     </div>
                   ))}
